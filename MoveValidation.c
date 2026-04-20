@@ -248,6 +248,7 @@ int IsInCheck(Board* pBoard, char color)
                 case 'B': attacks = IsValidBishop(pBoard, r, c, kingRow, kingCol);        break;
                 case 'Q': attacks = IsValidQueen (pBoard, r, c, kingRow, kingCol);        break;
                 case 'K': attacks = IsValidKing  (pBoard, r, c, kingRow, kingCol, enemy); break;
+                case 'A': attacks = IsValidAnteater (pBoard, r, c, kingRow, kingCol, enemy); break;
             }
 
             if (attacks) return 1;
