@@ -164,16 +164,29 @@ void RunTerminalGame(Board* pBoard, char gameMode, char aiDifficulty, char playe
     while (!gameOver) {
         PrintBoard(pBoard);
 
-        if (IsInCheck(pBoard, currentTurn)) {
-            if (IsCheckmate(pBoard, currentTurn)) {
+        if (IsCheckmate(pBoard, currentTurn)) {
+            if (IsInCheck(pBoard, currentTurn)) {
                 printf("\nCHECKMATE! %s wins the game.\n", (currentTurn == 'w') ? "Black" : "White");
+        
                 if (g_pLogFile) {
                     fprintf(g_pLogFile, "{Game Over: %s wins by Checkmate}\n", (currentTurn == 'w') ? "Black" : "White");
                     fflush(g_pLogFile);
                 }
-                gameOver = 1;
-                break;
             }
+            else {
+                printf("\nSTALEMATE! The game is a draw.\n");
+        
+                if (g_pLogFile) {
+                    fprintf(g_pLogFile, "{Game Over: Draw by Stalemate}\n");
+                    fflush(g_pLogFile);
+                }
+            }
+        
+            gameOver = 1;
+            break;
+        }
+
+        if (IsInCheck(pBoard, currentTurn)) {
             printf("\nWARNING: %s is in CHECK!\n", (currentTurn == 'w') ? "White" : "Black");
         }
 
